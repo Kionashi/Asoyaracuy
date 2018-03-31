@@ -1,0 +1,89 @@
+/* Menu */
+
+.sidebar-menu .treeview-menu > li {
+	min-height: 30px;
+	padding-left: 15px;
+	padding-right: 0px;
+}
+.sidebar-menu .sidebar-sub-menu-item {
+	padding-left: 0px !important;
+}
+.sidebar-menu-item .sidebar-menu-bullet,
+.sidebar-sub-menu-item .sidebar-menu-bullet {
+	padding-top: 6px !important;
+}
+.sidebar-menu-item .sidebar-menu-title,
+.sidebar-sub-menu-item .sidebar-menu-title {
+    padding-top: 3px !important;
+    padding-left: 0px !important;
+    white-space: normal;
+}
+
+/* DataTable */
+
+.table > thead > tr > th { 
+    vertical-align: top;
+}
+
+.btn-group-1 {
+    min-width: 42px !important;
+    width: 42px !important;    
+}
+
+.btn-group-2 {
+    min-width: 74px !important;
+    width: 74px !important;
+}
+
+.btn-group-3 {
+    min-width: 106px !important;
+    width: 106px !important;
+}
+
+.btn-group-4 {
+    min-width: 138px !important;
+    width: 138px !important;
+}
+
+.btn-group-5 {
+    min-width: 170px !important;
+    width: 170px !important;
+}
+
+.btn-group-6 {
+    min-width: 202px !important;
+    width: 202px !important;
+}
+
+.btn-group-7 {
+    min-width: 234px !important;
+    width: 234px !important;
+}
+
+.btn-group-8 {
+    min-width: 268px !important;
+    width: 268px !important;
+}
+
+.poll-result-container {
+	margin:auto;
+	width: 50%;
+}
+
+.poll-result-title{
+	font-size: 20px;
+	text-align: center;
+}
+.poll-result-title label {
+	margin:2em auto;
+}
+
+.poll-no-result {
+	text-align: center;
+}
+
+@media (max-height: 800px) {
+    .poll-result-container {
+	    width: 100%;
+	}
+}
