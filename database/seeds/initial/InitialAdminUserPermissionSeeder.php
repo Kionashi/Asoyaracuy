@@ -63,6 +63,10 @@ class InitialAdminUserPermissionSeeder extends Seeder
         // Dashboard Permissions
         $this->addAdminPermission("DASH", "Dashboard", "dashboard");
         
+        // Payment Permissions
+        $this->addAdminPermission("PAY", "List of payments", "payments");
+        $this->addAdminPermission("PAY", "View payments", "payments/detail");
+        
         // Polls Permissions
         $this->addAdminPermission("POL", "Poll Result", "management/polls/result");
         $this->addAdminPermission("POL", "Add Poll", "management/polls/add");
@@ -85,6 +89,7 @@ class InitialAdminUserPermissionSeeder extends Seeder
         $this->addAdminPermission("USER", "List User", "management/users");
         $this->addAdminPermission("USER", "View User", "management/users/detail");
         $this->addAdminPermission("USER", "Change User's password", "management/users/change-password");
+        
     }
 
     private function addAdminPermission($code, $name, $url) {

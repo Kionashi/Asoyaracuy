@@ -86,7 +86,7 @@ class SignIn extends RDNAdminController
 			return redirect()->route('admin');
 			
 		}else{
-			session()->flash('error-message', 'Username and password do not match.');			
+			session()->flash('error-message', 'Usuario y contraseña no coinciden.');			
 			return redirect()->back()->withInput();
 			
 		}
