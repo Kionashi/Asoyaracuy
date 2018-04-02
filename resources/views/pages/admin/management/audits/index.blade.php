@@ -15,8 +15,8 @@
                                 <th>Acci&oacute;n</th>
                                 <th>Ejecutor</th>
                                 <th>Fecha</th>
-                                @if(\AdminAuthHelper::hasAnyPermissions('management/audits/detail'))
-                                    <th class="text-center btn-group-{{\AdminAuthHelper::countPermissions('management/audits/detail')}}">Accion</th>
+                                @if(\AdminAuthHelper::hasAnyPermissions('audits/detail'))
+                                    <th class="text-center btn-group-{{\AdminAuthHelper::countPermissions('audits/detail')}}">Accion</th>
                                 @endif
                                 
                             </tr>
@@ -28,11 +28,11 @@
                                 <td>{{$audit->action}}</td>
                                 <td>{{$audit->adminUser->firstName}}</td>
                                 <td>{{$audit->created_at}}</td>
-                                @if(\AdminAuthHelper::hasAnyPermissions('management/audits/detail'))
+                                @if(\AdminAuthHelper::hasAnyPermissions('audits/detail'))
                                     <td class="text-center">
                                         <div class="btn-group">
-                                            @if(\AdminAuthHelper::hasPermission('management/audits/detail'))
-                                                <a href="{{route('management/audits/detail', $audit->id)}}" class="btn btn-sm btn-success" title="View"> 
+                                            @if(\AdminAuthHelper::hasPermission('audits/detail'))
+                                                <a href="{{route('audits/detail', $audit->id)}}" class="btn btn-sm btn-success" title="View"> 
                                                     <i class="fa fa-file"></i>
                                                 </a>
                                             @endif

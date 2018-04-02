@@ -17,9 +17,9 @@ class InitialAdminUserSeeder extends Seeder
     	$adminUser = new AdminUser();
 		$adminUser->id = 1;
 		$adminUser->enabled = true;
-	   	$adminUser->email = "vcardozo@codimatix.com";
-	    $adminUser->firstName = "Francisco";
-		$adminUser->lastName = "Muñoz";
+	   	$adminUser->email = "admin@mail.com";
+	    $adminUser->firstName = "Víctor";
+		$adminUser->lastName = "Cardozo";
     	$adminUser->password = "7c4a8d09ca3762af61e59520943dc26494f8941b";
     	$adminUser->phone = "5555555";
     	$adminUser->type = 1;

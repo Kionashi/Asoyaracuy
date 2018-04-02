@@ -41,14 +41,14 @@
                                 <div class="col-lg-8">
                                     {{ Form::text('dateContact', \AdminDateHelper::formatDate($audit->created_at), array('class'=>'form-control', 'id'=> 'dateContact', 'disabled')) }}
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
-                
+                    
                     <div class="box-body">
                         <div class="form-group">
                             <div class="col-lg-8 col-lg-offset-2">
-                                <a class="btn btn-default" href="{{route('management/audits')}}">Volver</a>                    
+                                <a class="btn btn-default" href="{{route('audits')}}">Volver</a>
                             </div>
                         </div>
                     </div>

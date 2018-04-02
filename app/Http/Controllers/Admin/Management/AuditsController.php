@@ -16,7 +16,7 @@ class AuditsController extends RDNAdminController
         $pageDefault = $this->configItems['rdn.admin.paginator-default.value'];
         
         // Add breadcrumbs
-        $this->addBreadcrumb('Auditorias', route('management/audits'));
+        $this->addBreadcrumb('Auditorias', route('audits'));
         
         // Set Title and subtitle
         $this->title = 'Auditorias';
@@ -35,8 +35,8 @@ class AuditsController extends RDNAdminController
     public function detail($id) {
         
         // Add breadcrumbs
-        $this->addBreadcrumb('Auditorias', route('management/audits'));
-        $this->addBreadcrumb('Detalle', route('management/audits/detail',$id));
+        $this->addBreadcrumb('Auditorias', route('audits'));
+        $this->addBreadcrumb('Detalle', route('audits/detail',$id));
         
         // Set Title and subtitle
         $this->title = 'Auditoria';

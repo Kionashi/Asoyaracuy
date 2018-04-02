@@ -33,8 +33,8 @@ if (Request::is('admin*')) {
         Route::post('management/admin-users/change-password/{id}', 'Management\AdminUsers@updatePassword')->name('management/admin-users/change-password');
         
         // Audits
-        Route::get('management/audits', 'Management\AuditsController@index')->name('management/audits');
-        Route::get('management/audits/detail/{id}', 'Management\AuditsController@detail')->name('management/audits/detail');
+        Route::get('audits', 'Management\AuditsController@index')->name('audits');
+        Route::get('audits/detail/{id}', 'Management\AuditsController@detail')->name('audits/detail');
         
         // Config item
         Route::get('management/config-items', 'Management\ConfigItems@index')->name('management/config-items');

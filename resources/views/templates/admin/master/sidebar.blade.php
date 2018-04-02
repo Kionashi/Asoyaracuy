@@ -6,6 +6,11 @@
                 <a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
             </li>
         @endif
+        @if(\AdminAuthHelper::hasPermission('audits'))
+            <li class="{{ \AdminRouteHelper::getSidebarClass('audits')}}">
+                <a href="{{ route('audits') }}"><i class="fa fa-dashboard"></i> <span>Auditorias</span></a>
+            </li>
+        @endif
         <li class="treeview col-xs-12 {{ \AdminRouteHelper::getSidebarClass('management')}}">
             <a href="#"> <i class="fa fa-wrench"></i>
                 <span>Gestión</span> <i class="fa fa-angle-left pull-right"></i>
@@ -68,16 +73,6 @@
                     </li>
                 @endif
             </ul>
-        </li>
-        <li>
-            @if(\AdminAuthHelper::hasPermission('management/users'))
-                <li class="col-xs-12 sidebar-menu-item {{ \AdminRouteHelper::getSidebarClass('management/audits')}}">
-                    <i class="fa fa-circle-o sidebar-menu-bullet col-xs-2"></i>
-                    <a class="sidebar-menu-title col-xs-10" href="{{ route('management/audits') }}">
-                        Auditorias
-                    </a>
-                </li>
-            @endif
         </li>
     </ul>
 </section>

@@ -40,6 +40,10 @@ class InitialAdminUserPermissionSeeder extends Seeder
         $this->addAdminPermission("ADR", "List Admin user roles", "management/admin-user-roles");
         $this->addAdminPermission("ADR", "View Admin user roles", "management/admin-user-roles/detail");
         
+        // Audit Permissions
+        $this->addAdminPermission("AUD", "List of auditories", "audits");
+        $this->addAdminPermission("AUD", "View of auditories", "audits/detail");
+        
         // Config Item Permissions
         $this->addAdminPermission("COI", "Edit Config Items", "management/config-items/edit");
         $this->addAdminPermission("COI", "List Config Items", "management/config-items");
@@ -48,10 +52,6 @@ class InitialAdminUserPermissionSeeder extends Seeder
         // Contact Permissions
         $this->addAdminPermission("CON", "List Contacts", "management/contacts");
         $this->addAdminPermission("CON", "View Contacts", "management/contacts/detail");
-        
-        // Audit Permissions
-        $this->addAdminPermission("AUD", "List of auditories", "management/audits");
-        $this->addAdminPermission("AUD", "View of auditories", "management/audits/detail");
         
         // Contact Reason Permissions
         $this->addAdminPermission("COR", "Add Contact reasons", "management/contact-reasons/add");
