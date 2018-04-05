@@ -117,6 +117,15 @@ if (Request::is('admin*')) {
         Route::post('management/users/edit/{id}', 'Management\UsersController@update')->name('management/users/edit');
         Route::post('management/users/change-password/{id}', 'Management\UsersController@updatePassword')->name('management/users/change-password');
         
+        //Operations
+		Route::get('/management/operations','OperationsController@index')->name('management/operations');
+		Route::get('/management/operations/add-income','OperationsController@createIncome')->name('management/operations/create-income');
+		Route::get('/management/operations/add-expense','OperationsController@createExpense')->name('management/operations/create-expense');
+		Route::post('/management/operations/store','OperationsController@store')->name('management/operations/create-operation');
+		Route::get('/management/operations/edit-income','OperationsController@editIncome')->name('management/operations/edit-income');
+		Route::get('/management/operations/edit-expense','OperationsController@editExpense')->name('management/operations/edit-expense');
+		Route::post('/management/operations/update','OperationsController@update')->name('management/operations/update');
+		Route::get('/management/operations/delete/{id}','OperationsController@delete')->name('management/operations/delete/');
     });
 }
 
