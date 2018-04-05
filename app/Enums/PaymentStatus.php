@@ -23,7 +23,7 @@ abstract class PaymentStatus extends Enums
             case PaymentStatus::APPROVED:
                 return 'Aprobado';
             case PaymentStatus::PENDING:
-                return 'Pendiente';
+                return 'En revisión';
             case PaymentStatus::REJECTED:
                 return 'Rechazado';
         }

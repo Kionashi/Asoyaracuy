@@ -56,6 +56,14 @@
                         </a>
                     </li>
                 @endif
+                @if(\AdminAuthHelper::hasPermission('management/payments'))
+                    <li class="col-xs-12 sidebar-menu-item {{ \AdminRouteHelper::getSidebarClass('management/payments')}}">
+                        <i class="fa fa-circle-o sidebar-menu-bullet col-xs-2"></i>
+                        <a class="sidebar-menu-title col-xs-10" href="{{ route('management/payments') }}">
+                            Pagos
+                        </a>
+                    </li>
+                @endif
                 @if(\AdminAuthHelper::hasPermission('management/contact-reasons'))
                     <li class="col-xs-12 sidebar-menu-item {{ \AdminRouteHelper::getSidebarClass('management/contact-reasons')}}">
                         <i class="fa fa-circle-o sidebar-menu-bullet col-xs-2"></i>

@@ -64,8 +64,10 @@ class InitialAdminUserPermissionSeeder extends Seeder
         $this->addAdminPermission("DASH", "Dashboard", "dashboard");
         
         // Payment Permissions
-        $this->addAdminPermission("PAY", "List of payments", "payments");
-        $this->addAdminPermission("PAY", "View payments", "payments/detail");
+        $this->addAdminPermission("PAY", "List of payments", "management/payments");
+        $this->addAdminPermission("PAY", "View payments", "management/payments/detail");
+        $this->addAdminPermission("PAY", "Approve payment", "management/payments/approve");
+        $this->addAdminPermission("PAY", "Reject payment", "management/payments/reject");
         
         // Polls Permissions
         $this->addAdminPermission("POL", "Poll Result", "management/polls/result");

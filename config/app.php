@@ -10,6 +10,8 @@ class_alias('App\Enums\Gender', 'Gender');
 class_alias('App\Enums\StaticContentSection', 'StaticContentSection');
 class_alias('App\Enums\ClientType', 'ClientType');
 class_alias('App\Enums\UserStatus', 'UserStatus');
+class_alias('App\Enums\PaymentStatus', 'PaymentStatus');
+class_alias('App\Enums\PaymentType', 'PaymentType');
 class_alias('App\Enums\Enums', 'Enums');
 class_alias('App\Helpers\Admin\AdminAuthHelper', 'AdminAuthHelper');
 class_alias('App\Helpers\Admin\AdminDateHelper', 'AdminDateHelper');

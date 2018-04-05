@@ -68,6 +68,12 @@ if (Request::is('admin*')) {
         Route::post('password-recovery', 'PasswordRecovery@passwordRecovery')->name('password-recovery');
         Route::post('password-recovery/change-password/{code}', 'PasswordRecovery@storeChangePassword')->name('password-recovery/change-password');
         
+        // Payment
+        Route::get('management/payments', 'Management\PaymentsController@index')->name('management/payments');
+        Route::get('management/payments/detail/{id}', 'Management\PaymentsController@detail')->name('management/payments/detail');
+        Route::get('management/payments/approve/{id}', 'Management\PaymentsController@approve')->name('management/payments/approve');
+        Route::get('management/payments/reject/{id}', 'Management\PaymentsController@reject')->name('management/payments/reject');
+        
         // Poll
         Route::get('management/polls', 'Management\Polls@index')->name('management/polls');
         Route::get('management/polls/add', 'Management\Polls@add')->name('management/polls/add');
@@ -81,6 +87,15 @@ if (Request::is('admin*')) {
         // Sign In
         Route::get('sign-in', 'SignIn@index')->name('sign-in');
         Route::post('sign-in', 'SignIn@authenticate')->name('sign-in/authenticate');
+        
+        // Special fee
+        Route::get('management/special-fees', 'Management\SpecialFeesController@index')->name('management/special-fees');
+        Route::get('management/special-fees/add', 'Management\SpecialFeesController@add')->name('management/special-fees/add');
+        Route::get('management/special-fees/delete/{id}', 'Management\SpecialFeesController@delete')->name('management/special-fees/delete');
+        Route::get('management/special-fees/detail/{id}', 'Management\SpecialFeesController@detail')->name('management/special-fees/detail');
+        Route::get('management/special-fees/edit/{id}', 'Management\SpecialFeesController@edit')->name('management/special-fees/edit');
+        Route::post('management/special-fees/add', 'Management\SpecialFeesController@store')->name('management/special-fees/add');
+        Route::post('management/special-fees/edit/{id}', 'Management\SpecialFeesController@update')->name('management/special-fees/edit');
         
         // Static content
         Route::get('management/static-contents', 'Management\StaticContents@index')->name('management/static-contents');

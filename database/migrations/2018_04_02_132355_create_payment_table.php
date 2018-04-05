@@ -29,6 +29,10 @@ class CreatePaymentTable extends Migration
             $table->enum('type', [PaymentType::DEPOSIT, PaymentType::TRANSFERENCE, PaymentType::CASH]);
             $table->enum('status', [PaymentStatus::APPROVED, PaymentStatus::PENDING, PaymentStatus::REJECTED]);
             
+            // Foreing keys
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('user');
+            
             // Timestamps
             $table->timestamps();
         });
