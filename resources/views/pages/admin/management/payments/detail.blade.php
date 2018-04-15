@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                {{ Form::label(null, 'Nota', array('class'=>'col-lg-2 col-sm-2 control-label')) }} 
+                                {{ Form::label(null, 'Observación', array('class'=>'col-lg-2 col-sm-2 control-label')) }} 
                                 <div class="col-lg-8">
                                     {{ Form::textarea('note', null, array('class'=>'form-control', 'id' => 'note', 'disabled')) }}
                                 </div>
@@ -74,10 +74,10 @@
                     <div class="box-body">
                         <div class="form-group">
                             <div class="col-lg-8 col-lg-offset-2">
-                                @if(\AdminAuthHelper::hasPermission('management/payments/approve'))
+                                @if(\AdminAuthHelper::hasPermission('management/payments/approve') && $payment->status != PaymentStatus::APPROVED)
                                     <a href="{{route('management/payments/approve', $payment->id)}}" class="btn btn-success">Aprobar</i></a>
                                 @endif
-                                @if(\AdminAuthHelper::hasPermission('management/payments/reject'))
+                                @if(\AdminAuthHelper::hasPermission('management/payments/reject') && $payment->status != PaymentStatus::REJECTED)
                                     <a href="{{route('management/payments/reject', $payment->id)}}" class="btn btn-danger">Rechazar</i></a>
                                 @endif
                                 <a class="btn btn-default" href="{{route('management/payments')}}">Volver</a>

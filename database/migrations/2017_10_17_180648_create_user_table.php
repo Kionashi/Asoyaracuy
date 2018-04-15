@@ -32,11 +32,6 @@ class CreateUserTable extends Migration
             $table->dateTime('register_date')->nullable();
             $table->string('register_ip_address')->nullable();
             $table->enum('status', [UserStatus::ACTIVE, UserStatus::CREATED, UserStatus::DISABLED]);
-            
-            // Foreign keys
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('user');
-            
         });
     }
 

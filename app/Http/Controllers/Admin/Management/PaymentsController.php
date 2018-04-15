@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Management;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\RDNAdminController;
 use App\Models\Payment as PaymentModel;
-use App\Enum\PaymentStatus;
+use App\Enums\PaymentStatus;
 
 class PaymentsController extends RDNAdminController
 {
@@ -48,19 +49,41 @@ class PaymentsController extends RDNAdminController
         ;
     }
     
-    public function approve($id) {
-        // Set status to approved
-        $this->updateStatus($id, PaymentStatus::APPROVED);
-    }
-    
-    public function reject($id) {
-        // Set status to rejected
-        $this->updateStatus($id, PaymentStatus::REJECTED);
-    }
-    
-    private function updateStatus($id, $newStatus) {
+    public function approve(Request $request, $id) {
         // Find payment
-        $payment = PaymentModel::find($id);
+        $payment = PaymentModel::with('user')->find($id);
+        if ($payment->status != PaymentStatus::APPROVED) {
+            // Set status to approved
+            $this->updateStatus($payment, PaymentStatus::APPROVED);
+            
+            // Update user balance
+            $user = $payment->user;
+            $user->balance += $payment->amount;
+            $user->save();
+            
+            // Store audit
+            $this->storeAudit('Aprobar pago ['. $payment->user->house.']', 'Pago aprobado por para ' . $payment->user->house . ' por un monto de '. $payment->amount, $request->getClientIp());
+        }
+        
+        // Redirect to list
+        return redirect()->route('management/payments');
+    }
+    
+    public function reject(Request $request, $id) {
+        // Find payment
+        $payment = PaymentModel::with('user')->find($id);
+        
+        // Set status to rejected
+        $this->updateStatus($payment, PaymentStatus::REJECTED);
+        
+        // Store audit
+        $this->storeAudit('Aprobar pago ['. $payment->user->house.']', 'Pago rechazado por para ' . $payment->user->house . ' por un monto de '. $payment->amount . ' por motivo ' . $payment->note, $request->getClientIp());
+        
+        // Redirect to list
+        return redirect()->route('management/payments');
+    }
+    
+    private function updateStatus($payment, $newStatus) {
         if ($payment) {
             // Update status
             $originalStatus = $payment->status;
@@ -68,11 +91,6 @@ class PaymentsController extends RDNAdminController
             
             // Update payment
             $payment->save();
-            
-            // Manage user balance
-//             switch($newStatus) {
-//                 case PaymentStatus::APPROVED
-//             }
         }
     }
 
