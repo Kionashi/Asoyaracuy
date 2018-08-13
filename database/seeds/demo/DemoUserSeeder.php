@@ -19,7 +19,7 @@ class DemoUserSeeder extends Seeder
         $user->email = "choroni@mail.com";
         $user->house = "Choroni";
         $user->balance = 0;
-        $user->password = "7c4a8d09ca3762af61e59520943dc26494f8941b";
+        $user->password = bcrypt('123456');
         $user->phone = "02122381434";
         $user->register_date = '2018-04-05 19:04:41';
         $user->register_ip_address = '192.168.0.1';

@@ -137,8 +137,7 @@ else {
     ],
     function() {
         // Root redirects to home
-        Route::get('/', function () {
-            dump("FRONTEND"); die;
-        })->name('root');
+        Route::get('/', 'HomeController@index')->name('home');
     });
 }
+Auth::routes();
