@@ -13,29 +13,13 @@ class User extends Authenticatable
     public $timestamps = false;
     public $table = 'user';
     protected $fillable = [
-        'activation_code', 
-        'activation_date', 
-        'activation_ip_address', 
-        'bbm_pin', 
-        'birth_date', 
-        'city', 
+        'balance', 
         'email', 
         'enabled', 
-        'first_name',
-        'gender',
-        'image',
-        'last_name',
+        'house', 
         'password',
         'phone',
-        'recover_code',
-        'recover_date',
-        'recover_ip_address',
-        'register_date',
-        'register_ip_address',
         'status',
-        'telegram_user',
-        'username',
-        'country_id'
     ];
 
     public function contacts()
@@ -52,7 +36,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\UserNotification');
     }
-    
+
+    public function specialFee() {
+
+         return $this->hasOne('App\Models\SpecialFee');
+    }
+
     // Virtual attributes
     public function getContactCountAttribute() {
         return $this->contacts ? $this->contacts->count() : 0;

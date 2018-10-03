@@ -42,6 +42,16 @@
                                 <span class="help-block help-block-error right-light">{{ $errors->first('balance') }}</span>
                             </div>
                         </div>
+                        <?php dump($user); ?>
+                        @if($user->specialFee)
+                            <div class="form-group">
+                                {!! Form::label('specialFee', 'Cuota Especial', array('class' => 'col-lg-2 col-sm-2 control-label')) !!}
+                                <div class="col-lg-8">
+                                    {!! Form::text('specialFee', $user->specialFee->amount, array('class' => 'form-control')) !!}
+                                    <span class="help-block help-block-error right-light">{{ $errors->first('amount') }}</span>
+                                </div>
+                            </div>
+                        @endif
                         <div class="form-group">
                             {!! Form::label('enabled', 'Habilitado' , array('class' => 'col-lg-2 col-sm-2 control-label')) !!}
                             <div class="col-lg-8">
@@ -58,6 +68,10 @@
                             {!! Form::submit('Guardar', array('class' => 'btn btn-primary')) !!}
                             @if(AdminAuthHelper::hasPermission('management/users/change-password'))
                                 <a href="{{ route('management/users/change-password', $user->id) }}" class="btn btn-primary">Cambiar contraseña</a>
+                            @endif    
+                            @if(AdminAuthHelper::hasPermission('management/special-fees/add'))
+                            
+                                <a href="{{route('management/special-fees/add', $user->id)}}" class="btn btn-primary">Administrar Cuota especial</a>
                             @endif                            
                             <a href="{{ route('management/users') }}" class="btn btn-default">Cancelar</a>
                         </div>

@@ -61,7 +61,7 @@ class InitialAdminUserPermissionSeeder extends Seeder
         $this->addAdminPermission("COR", "View Contact reasons", "management/contact-reasons/detail");
         
         // Dashboard Permissions
-        $this->addAdminPermission("DASH", "Dashboard", "dashboard");
+        $this->addAdminPermission("DSB", "Dashboard", "dashboard");
         
         // Payment Permissions
         $this->addAdminPermission("PAY", "List of payments", "management/payments");
@@ -85,12 +85,22 @@ class InitialAdminUserPermissionSeeder extends Seeder
         $this->addAdminPermission("STC", "View Static content", "management/static-contents/detail");
         
         // User Permissions
-        $this->addAdminPermission("USER", "Add User", "management/users/add");
-        $this->addAdminPermission("USER", "Delete User", "management/users/delete");
-        $this->addAdminPermission("USER", "Edit User", "management/users/edit");
-        $this->addAdminPermission("USER", "List User", "management/users");
-        $this->addAdminPermission("USER", "View User", "management/users/detail");
-        $this->addAdminPermission("USER", "Change User's password", "management/users/change-password");
+        $this->addAdminPermission("USR", "Add User", "management/users/add");
+        $this->addAdminPermission("USR", "Delete User", "management/users/delete");
+        $this->addAdminPermission("USR", "Edit User", "management/users/edit");
+        $this->addAdminPermission("USR", "List User", "management/users");
+        $this->addAdminPermission("USR", "View User", "management/users/detail");
+        $this->addAdminPermission("USR", "Change User's password", "management/users/change-password");
+
+        //Fee Permissions
+        $this->addAdminPermission("FEE", "View and create Fees", "management/fees");
+
+        //Collection Permissions
+        
+        $this->addAdminPermission("COL", "View Collection", "collection");
+        $this->addAdminPermission("COL", "Create Collection", "collection/add");
+
+
         
     }
 

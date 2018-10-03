@@ -1,44 +1,75 @@
 @extends('templates.frontend.master.index')
 @section('content')
-	<div class="gtco-loader"></div>
-	
-	<div id="page">
-
-	
-	<!-- <div class="page-inner"> -->
-	<nav class="gtco-nav" role="navigation">
-		<div class="gtco-container">
-			
-			<div class="row">
-				<div class="col-sm-4 col-xs-12">
-					<div id="gtco-logo"><a href="index.html">Asoyaracuy <em>.</em></a></div>
-				</div>
-				<div class="col-xs-8 text-right menu-1">
-					<ul>
-						<li><a href="menu.html">Menu</a></li>
-						<li class="has-dropdown">
-							<a href="services.html">Services</a>
-							<ul class="dropdown">
-								<li><a href="#">Food Catering</a></li>
-								<li><a href="#">Wedding Celebration</a></li>
-								<li><a href="#">Birthday's Celebration</a></li>
-							</ul>
-						</li>
-						<li><a href="contact.html">Contact</a></li>
-						<li class="btn-cta"><a href="#"><span>Reservation</span></a></li>
-					</ul>	
-				</div>
-			</div>
-			
-		</div>
-	</nav>
-
+	<div class="overlay col-12  my-auto">
+	<!--<img src="{!! asset('frontend/images/cambures-rojos.jpg') !!}" style="max-width: 100%; max-height: 38.45em;"> -->
 	</div>
+    <div class="masthead">
+      <div class="masthead-bg"></div>
+      <div class="container h-100">
+        <div class="row h-100">
+          <div class="col-12 my-auto">
+            <div class="masthead-content text-white py-7 py-md-0">
+	            <h1 class="mb-3">Bienvenido {{$user->house}} {{$user->balance}}Bs</h1> 
+	            @if(isset($message)) 
+	            <p>{{$message}}</p>
+	            @endif
+	            <p class="mb-5">Registrar pago</p>
+	            {{Form::open(array('route' => 'create-payment', 'files' => true)) }}
+					{{Form::select('type', array('none' => 'Tipo de pago','Cheque' => 'Cheque', 'Transferencia' => 'Transferencia', 'Deposito' => 'Deposito'), null, array('class' => 'form-control', 'id' => 'payment_method2')) }} 
+					</br>
+			    	<select id="bank" name="bank" class = "form-control"><option value="Mercantil">Mercantil</option><option value="Venezuela">Venezuela</option><option value="Provincial">Provincial</option><option value="Bicentenario">Bicentenario</option><option value="Exterior">Exterior</option><option value="Banesco">Banesco</option><option value="BOD">BOD</option><option value="Industrial">Industrial</option><option value="Caroni">Caron&iacute;</option><option value="Banco del tesoro">Banco del tesoro</option></select>  
+					</br>
+					{{Form::text('confirmation_code','',array('class' => 'form-control','placeholder'=> 'Codigo de confirmacion'))}}
+					</br>
+					{{Form::text('amount','',array('class' => 'form-control','placeholder'=>'Monto'))}}
+					</br>
+					{{Form::text('date','',array('class' => 'form-control','placeholder'=>'Fecha del pago: AAAA-MM-DD'))}}
+					</br>
+					{!! Form::file('file') !!}
+					</br>	
+			    	{{Form::submit('Registrar pago',array('class' => 'btn btn-lg btn-primary btn-block')) }} 
+	            {!!Form::close()!!}
+	            <div class="input-group input-group-newsletter">
+	            	<a href="{{route('demo')}}"><button class="btn btn-primary" type="button">Demo</button></a>
+	            </div>
+            </div>
+          </div>
 
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
-	
+        </div>
+
+      </div>
+    </div>
+
+     <div class="social-icons masthead-content py-5 py-md-0 text-white">
+	            <h1 class="mb-3">Asoyaracuy</h1>
+	            <p class="mb-5">Asociación vecinal sin fines de lucro.</p>
+	            {!!Form::open(array('id'=> 'login', 'route' => 'login')) !!}
+	            <div class="input-group input-group-newsletter">
+            		{!! Form::text('email', null, array('id' => 'email', 'class' => 'form-control', 'placeholder' => 'Correo electrónico')) !!}
+		             <br />
+		            @if ($errors->has('email'))
+	                    <span class="help-block">
+	                        <strong>{{ $errors->first('email') }}</strong>
+	                    </span>
+	                @endif
+	            </div>
+	            <div class="input-group input-group-newsletter">
+		            {!! Form::password('password', null, array('id' => 'password', 'class' => 'form-control', 'placeholder' => 'Contraseña')) !!}
+	            	@if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
+	            </div>
+	            <div class="input-group input-group-newsletter">
+	            	<button class="btn btn-secondary" type="submit">Ingresar</button>
+	            </div>
+	            {!!Form::close()!!}
+	            <div class="input-group input-group-newsletter">
+	            	<a href="{{route('demo')}}"><button class="btn btn-primary" type="button">Demo</button>
+	            </div>
+            </div>
+
 @endsection
 @section('custom_script')
 	<script type="text/javascript">

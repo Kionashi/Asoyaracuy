@@ -19,7 +19,7 @@ if (Request::is('admin*')) {
     ],
     function() {
         // Admin
-        Route::get('/', 'Home@index')->name('admin');
+        Route::get('/', 'Dashboard@index')->name('admin');
         
         // Admin user
         Route::get('management/admin-users', 'Management\AdminUsers@index')->name('management/admin-users');
@@ -55,8 +55,20 @@ if (Request::is('admin*')) {
         Route::post('management/contact-reasons/add', 'Management\ContactReasons@store')->name('management/contact-reasons/add');
         Route::post('management/contact-reasons/edit/{id}', 'Management\ContactReasons@update')->name('management/contact-reasons/edit');
         
+        // SpecialFee
+        Route::get('management/special-fees', 'Management\SpecialFeeController@index')->name('management/special-fees');
+        Route::get('management/special-fees/add/{userId}', 'Management\SpecialFeeController@create')->name('management/special-fees/add');
+        Route::post('management/special-fees/add', 'Management\SpecialFeeController@store')->name('management/special-fees/add');
+        Route::get('management/special-fees/delete/{id}', 'Management\SpecialFeeController@delete')->name('management/special-fees/delete');
+        
         // Dashboard
         Route::get('dashboard', 'Dashboard@index')->name('dashboard');
+
+        //Collection
+        Route::get('collection', 'CollectionController@index')->name('collection');
+        Route::get('collection/add', 'CollectionController@create')->name('collection/add');
+
+
         
         // Logout
         Route::get('logout', 'Logout@index')->name('logout');
@@ -73,6 +85,10 @@ if (Request::is('admin*')) {
         Route::get('management/payments/detail/{id}', 'Management\PaymentsController@detail')->name('management/payments/detail');
         Route::get('management/payments/approve/{id}', 'Management\PaymentsController@approve')->name('management/payments/approve');
         Route::get('management/payments/reject/{id}', 'Management\PaymentsController@reject')->name('management/payments/reject');
+
+         // Fee
+        Route::get('management/fees', 'Management\FeesController@index')->name('management/fees');
+        Route::post('management/fees', 'Management\FeesController@create')->name('management/fees');
         
         // Poll
         Route::get('management/polls', 'Management\Polls@index')->name('management/polls');
@@ -89,13 +105,13 @@ if (Request::is('admin*')) {
         Route::post('sign-in', 'SignIn@authenticate')->name('sign-in/authenticate');
         
         // Special fee
-        Route::get('management/special-fees', 'Management\SpecialFeesController@index')->name('management/special-fees');
-        Route::get('management/special-fees/add', 'Management\SpecialFeesController@add')->name('management/special-fees/add');
-        Route::get('management/special-fees/delete/{id}', 'Management\SpecialFeesController@delete')->name('management/special-fees/delete');
-        Route::get('management/special-fees/detail/{id}', 'Management\SpecialFeesController@detail')->name('management/special-fees/detail');
-        Route::get('management/special-fees/edit/{id}', 'Management\SpecialFeesController@edit')->name('management/special-fees/edit');
-        Route::post('management/special-fees/add', 'Management\SpecialFeesController@store')->name('management/special-fees/add');
-        Route::post('management/special-fees/edit/{id}', 'Management\SpecialFeesController@update')->name('management/special-fees/edit');
+        // Route::get('management/special-fees', 'Management\SpecialFeesController@index')->name('management/special-fees');
+        // Route::get('management/special-fees/add', 'Management\SpecialFeesController@add')->name('management/special-fees/add');
+        // Route::get('management/special-fees/delete/{id}', 'Management\SpecialFeesController@delete')->name('management/special-fees/delete');
+        // Route::get('management/special-fees/detail/{id}', 'Management\SpecialFeesController@detail')->name('management/special-fees/detail');
+        // Route::get('management/special-fees/edit/{id}', 'Management\SpecialFeesController@edit')->name('management/special-fees/edit');
+        // Route::post('management/special-fees/add', 'Management\SpecialFeesController@store')->name('management/special-fees/add');
+        // Route::post('management/special-fees/edit/{id}', 'Management\SpecialFeesController@update')->name('management/special-fees/edit');
         
         // Static content
         Route::get('management/static-contents', 'Management\StaticContents@index')->name('management/static-contents');
@@ -138,6 +154,10 @@ else {
     function() {
         // Root redirects to home
         Route::get('/', 'HomeController@index')->name('home');
+        Route::post('/nuevo-pago', 'PaymentsController@create')->name('create-payment');
+        Route::get('/demo', 'UsersController@demo')->name('demo');
     });
 }
 Auth::routes();
+
+

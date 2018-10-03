@@ -3,12 +3,17 @@
         <li class="header">MENÚ PRINCIPAL</li>
         @if(\AdminAuthHelper::hasPermission('dashboard'))
             <li class="{{ \AdminRouteHelper::getSidebarClass('dashboard')}}">
-                <a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                <a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> <span>Panel de Administración</span></a>
+            </li>
+        @endif
+        @if(\AdminAuthHelper::hasPermission('collection'))
+            <li class="{{ \AdminRouteHelper::getSidebarClass('collection')}}">
+                <a href="{{ route('collection') }}"><i class="fa fa-money"></i> <span>Recaudación</span></a>
             </li>
         @endif
         @if(\AdminAuthHelper::hasPermission('audits'))
             <li class="{{ \AdminRouteHelper::getSidebarClass('audits')}}">
-                <a href="{{ route('audits') }}"><i class="fa fa-dashboard"></i> <span>Auditorias</span></a>
+                <a href="{{ route('audits') }}"><i class="fa fa-search"></i> <span>Auditorias</span></a>
             </li>
         @endif
         <li class="treeview col-xs-12 {{ \AdminRouteHelper::getSidebarClass('management')}}">
@@ -64,6 +69,22 @@
                         </a>
                     </li>
                 @endif
+                @if(\AdminAuthHelper::hasPermission('management/fees'))
+                    <li class="col-xs-12 sidebar-menu-item {{ \AdminRouteHelper::getSidebarClass('management/fees')}}">
+                        <i class="fa fa-circle-o sidebar-menu-bullet col-xs-2"></i>
+                        <a class="sidebar-menu-title col-xs-10" href="{{ route('management/fees') }}">
+                            Cuota general
+                        </a>
+                    </li>
+                @endif
+                @if(\AdminAuthHelper::hasPermission('management/special-fees'))
+                    <li class="col-xs-12 sidebar-menu-item {{ \AdminRouteHelper::getSidebarClass('management/special-fees')}}">
+                        <i class="fa fa-circle-o sidebar-menu-bullet col-xs-2"></i>
+                        <a class="sidebar-menu-title col-xs-10" href="{{ route('management/special-fees') }}">
+                            Cuotas especiales
+                        </a>
+                    </li>
+                @endif
                 @if(\AdminAuthHelper::hasPermission('management/contact-reasons'))
                     <li class="col-xs-12 sidebar-menu-item {{ \AdminRouteHelper::getSidebarClass('management/contact-reasons')}}">
                         <i class="fa fa-circle-o sidebar-menu-bullet col-xs-2"></i>
@@ -82,5 +103,6 @@
                 @endif
             </ul>
         </li>
+        
     </ul>
 </section>

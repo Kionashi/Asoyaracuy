@@ -74,10 +74,8 @@
                     <div class="box-body">
                         <div class="form-group">
                             <div class="col-lg-8 col-lg-offset-2">
-                                @if(\AdminAuthHelper::hasPermission('management/payments/approve') && $payment->status != PaymentStatus::APPROVED)
+                                @if(\AdminAuthHelper::hasPermission('management/payments/approve') && $payment->status == PaymentStatus::PENDING)
                                     <a href="{{route('management/payments/approve', $payment->id)}}" class="btn btn-success">Aprobar</i></a>
-                                @endif
-                                @if(\AdminAuthHelper::hasPermission('management/payments/reject') && $payment->status != PaymentStatus::REJECTED)
                                     <a href="{{route('management/payments/reject', $payment->id)}}" class="btn btn-danger">Rechazar</i></a>
                                 @endif
                                 <a class="btn btn-default" href="{{route('management/payments')}}">Volver</a>

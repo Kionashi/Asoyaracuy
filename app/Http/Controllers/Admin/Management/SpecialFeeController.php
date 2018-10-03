@@ -69,20 +69,46 @@ class SpecialFeeController extends RDNAdminController
         ;
     }
     
-    public function detail($id) {
+    public function create($userId) {
         // Add breadcrumbs
         $this->addBreadcrumb('Cuotas especiales', route('management/special-fees'));
-        $this->addBreadcrumb('Detalle', route('management/special-fees/detail', $id));
         
         // Set Title and subtitle
         $this->title = 'Cuotas especiales';
-        $this->subtitle = 'entrada #'.$id;
         
-        $specialFee = SpecialFeeModel::with('user')->find($id);
-        
-        return $this->view('pages.admin.management.special-fees.detail')
-            ->with('specialFee', $specialFee)
+        return $this->view('pages.admin.management.special-fees.create')
+            ->with('userId', $userId)
         ;
+    }
+
+    public function store(Request $request){
+
+        $userId = $request->userId;
+        $amount = $request->amount;
+
+        $oldSpecialFee = SpecialFee::getCurrent($userId);
+        
+        $specialFee = new SpecialFee();
+        $specialFee->amount = $amount;
+        $specialFee->enabled = true;
+        $specialFee->user_id = $userId;
+        
+        if($oldSpecialFee){
+            $oldSpecialFee->enabled = false;
+            $oldSpecialFee->save();
+        }
+
+        $specialFee->save();
+
+        return $this->index();
+    }
+
+    public function delete($id){
+        
+        $specialFee = SpecialFee::find($id);
+        $specialFee->delete();
+
+        return $this->index();
     }
 
 }

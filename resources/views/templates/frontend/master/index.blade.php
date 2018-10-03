@@ -27,70 +27,37 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
-	
-	<!-- Animate.css -->
-	{!!Html::style('/frontend/css/animate.css')!!}
-	<!-- Icomoon Icon Fonts-->
-	{!!Html::style('/frontend/css/icomoon.css')!!}
-	<!-- Themify Icons-->
-	{!!Html::style('/frontend/css/themify-icons.css')!!}
+
+	<!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
 	<!-- Bootstrap  -->
-	{!!Html::style('/frontend/css/bootstrap.css')!!}
+	{!!Html::style('/frontend/css/bootstrap.min.css')!!}
 
-	<!-- Magnific Popup -->
-	{!!Html::style('/frontend/css/magnific-popup.css')!!}
+	<!-- NEW TEMPLATE -->
+	{!!Html::style('/frontend/css/fontawesome.min.css')!!}
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-	<!-- Bootstrap DateTimePicker -->
-	{!!Html::style('/frontend/css/bootstrap-datetimepicker.min.css')!!}
-
-	<!-- Owl Carousel  -->
-	{!!Html::style('/frontend/css/owl.carousel.min.css')!!}
-	{!!Html::style('/frontend/css/owl.theme.default.min.css')!!}
-
-	<!-- Theme style  -->
-	{!!Html::style('/frontend/css/style.css')!!}
-
-	<!-- Modernizr JS -->
-    {!!Html::script('/frontend/js/modernizr-2.6.2.min.js')!!}
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
+	<!-- Coming Soon -->
+	{!!Html::style('/frontend/css/coming-soon.min.css')!!}
 
 	</head>
 	<body>
 
 		@yield('content')
-	<!-- jQuery -->
+
+    <!-- NEW TEMPLATE -->
+
+	<!-- JQuery-->
     {!!Html::script('/frontend/js/jquery.min.js')!!}
 
-	<!-- jQuery Easing -->
-    {!!Html::script('/frontend/js/jquery.easing.1.3.js')!!}
-
-	<!-- Bootstrap -->
-    {!!Html::script('/frontend/js/bootstrap.min.js')!!}
-
-	<!-- Waypoints -->
-    {!!Html::script('/frontend/js/jquery.waypoints.min.js')!!}
-
-	<!-- Carousel -->
-    {!!Html::script('/frontend/js/owl.carousel.min.js')!!}
-
-	<!-- countTo -->
-    {!!Html::script('/frontend/js/jquery.countTo.min.js')!!}
-
-	<!-- Stellar Parallax -->
-    {!!Html::script('/frontend/js/jquery.stellar.min.js')!!}
-
-	<!-- Magnific Popup -->
-    {!!Html::script('/frontend/js/jqjquery.magnific-popupuery.min.js')!!}
-    {!!Html::script('/frontend/js/magnific-popup-options.js')!!}
-    {!!Html::script('/frontend/js/moment.min.js')!!}
-    {!!Html::script('/frontend/js/bootstrap-datetimepicker.min.js')!!}
-
-	<!-- Main -->
-    {!!Html::script('/frontend/js/main.js')!!}
-
+    <!--JQuery Dropotron -->
+    {!!Html::script('/frontend/js/coming-soon.min.js')!!}
+	
+	<!--Bootstrap Bundle -->
+    {!!Html::script('/frontend/js/bootstrap-bundle.min.js')!!}
 	</body>
 </html>
 

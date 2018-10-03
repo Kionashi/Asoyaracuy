@@ -62,7 +62,7 @@ class PaymentsController extends RDNAdminController
             $user->save();
             
             // Store audit
-            $this->storeAudit('Aprobar pago ['. $payment->user->house.']', 'Pago aprobado por para ' . $payment->user->house . ' por un monto de '. $payment->amount, $request->getClientIp());
+            $this->storeAudit('Aprobar pago ['. $payment->user->house.']', 'Pago aprobado por'.' para ' . $payment->user->house . ' por un monto de '. $payment->amount, $request->getClientIp());
         }
         
         // Redirect to list
