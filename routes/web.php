@@ -58,8 +58,8 @@ if (Request::is('admin*')) {
         // SpecialFee
         Route::get('management/special-fees', 'Management\SpecialFeeController@index')->name('management/special-fees');
         Route::get('management/special-fees/add/{userId}', 'Management\SpecialFeeController@create')->name('management/special-fees/add');
-        Route::post('management/special-fees/add', 'Management\SpecialFeeController@store')->name('management/special-fees/add');
-        Route::get('management/special-fees/delete/{id}', 'Management\SpecialFeeController@delete')->name('management/special-fees/delete');
+        Route::post('management/special-fees/add', 'Management\SpecialFeeController@store')->name('management/special-fees/add/');
+        Route::get('management/special-fees/delete/{id}', 'Management\SpecialFeeController@delete')->name('management/special-fees/delete/');
         
         // Dashboard
         Route::get('dashboard', 'Dashboard@index')->name('dashboard');
@@ -151,13 +151,29 @@ else {
         'middleware' => ['web'],
         'namespace' => 'Frontend'
     ],
+
     function() {
-        // Root redirects to home
+        // Home
         Route::get('/', 'HomeController@index')->name('home');
-        Route::post('/nuevo-pago', 'PaymentsController@create')->name('create-payment');
+        Route::get('/encuesta', 'PollsController@index')->name('polls');
+        Route::get('/sobre-nosotros', 'HomeController@about-us')->name('about-us');
+        
+        //Contact
+        Route::get('/contacto', 'ContactController@contact')->name('contact');
+
+        //Payments
+        Route::get('/pagos', 'PaymentsController@index')->name('payments');
+        Route::get('/pagos/detalle/{id}', 'PaymentsController@detail')->name('payments/detail');
+        Route::get('/pagos/nuevo', 'PaymentsController@create')->name('payments/add');
+        Route::post('/pagos/nuevo', 'PaymentsController@store')->name('payments/add');
+
+
+        //Demo
         Route::get('/demo', 'UsersController@demo')->name('demo');
     });
 }
+
 Auth::routes();
+Route::post('/login','Auth\LoginController@login')->name('login');
 
 

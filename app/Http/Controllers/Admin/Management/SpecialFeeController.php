@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin\Management;
 
 use App\Http\Controllers\Admin\RDNAdminController;
+use Illuminate\Http\Request;
 use JsValidator;
-use App\Models\SpecialFee as SpecialFeeModel;
+use App\Models\SpecialFee;
+use App\Models\User;
 
 class SpecialFeeController extends RDNAdminController
 {
@@ -58,8 +60,11 @@ class SpecialFeeController extends RDNAdminController
         // Set Title and subtitle
         $this->title = 'Cuotas Especiales';
         
-        // Find all audits
-        $specialFees = SpecialFeeModel::with('user')->get();
+        // Find all specialFees
+        $specialFees = SpecialFee::where('enabled',true)
+            ->with('user')
+            ->get()
+            ;
         
         // Display view
         return $this->view('pages.admin.management.special-fees.index')
@@ -75,9 +80,16 @@ class SpecialFeeController extends RDNAdminController
         
         // Set Title and subtitle
         $this->title = 'Cuotas especiales';
-        
+        $specialFee = SpecialFee::getCurrent($userId);
+
+        if(!$specialFee) {
+            $specialFee = new SpecialFee();
+        }
+        $user = User::find($userId);
+
         return $this->view('pages.admin.management.special-fees.create')
-            ->with('userId', $userId)
+            ->with('user', $user)
+            ->with('specialFee',$specialFee)
         ;
     }
 
@@ -85,9 +97,9 @@ class SpecialFeeController extends RDNAdminController
 
         $userId = $request->userId;
         $amount = $request->amount;
-
         $oldSpecialFee = SpecialFee::getCurrent($userId);
-        
+        $user = User::find($userId);
+
         $specialFee = new SpecialFee();
         $specialFee->amount = $amount;
         $specialFee->enabled = true;
@@ -100,13 +112,22 @@ class SpecialFeeController extends RDNAdminController
 
         $specialFee->save();
 
+        if($oldSpecialFee){
+            // Store audit
+            $this->storeAudit('Editar cuota especial ['. $user->house.']', 'La Cuota especial original (' . $oldSpecialFee->amount.') fue modificada a la cantidad de: '.$specialFee->amount, $request->getClientIp());
+        }else{
+            $this->storeAudit('Agregar cuota especial ['. $user->house.']', 'Creada cuota especial por el monto de ' . $specialFee->amount, $request->getClientIp());
+        }
+
         return $this->index();
     }
 
-    public function delete($id){
-        
+    public function delete($id, Request $request){
+
         $specialFee = SpecialFee::find($id);
+        $user = User::find($specialFee->user_id);
         $specialFee->delete();
+        $this->storeAudit('Borrar cuota especial ['. $user->house.']', 'Borrada cuota especial con el monto de ' . $specialFee->amount, $request->getClientIp());
 
         return $this->index();
     }

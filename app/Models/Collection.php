@@ -18,4 +18,8 @@ class Collection extends Model
 
     	return $collection;
     }
+
+    public function fee(){
+    	return $this->belongsTo('App\Models\Fee');
+    }
 }

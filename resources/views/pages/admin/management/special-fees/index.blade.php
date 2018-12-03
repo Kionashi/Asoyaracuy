@@ -25,8 +25,8 @@
                                 <th>#</th>
                                 <th>Monto</th>
                                 <th>Quinta</th>
-                                @if(AdminAuthHelper::hasAnyPermissions('management/special-fees/edit,management/special-fees/delete'))
-                                    <th class="text-center btn-group-{{AdminAuthHelper::countPermissions('management/special-fees/delete')}}">Acciones</th>
+                                @if(AdminAuthHelper::hasAnyPermissions('management/special-fees/edit,management/special-fees/delete/'))
+                                    <th class="text-center btn-group-{{AdminAuthHelper::countPermissions('management/special-fees/delete/')}}">Acciones</th>
                                 @endif
                             </tr>
                         </thead>
@@ -36,10 +36,10 @@
                                 <td>{{$specialFee->id}}</td>
                                 <td>{{$specialFee->amount}}</td>
                                 <td>{{$specialFee->user->house}}</td>
-                                @if(AdminAuthHelper::hasAnyPermissions('management/special-fees/delete'))
+                                @if(AdminAuthHelper::hasAnyPermissions('management/special-fees/delete/'))
                                     <td class="text-center">
                                         <div class="btn-group">
-                                            @if(AdminAuthHelper::hasPermission('management/special-fees/delete'))
+                                            @if(AdminAuthHelper::hasPermission('management/special-fees/delete/'))
                                                 <button type="button" title="Delete" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{$specialFee->id}}">
                                                     <i class="fa fa-trash-o"></i>
                                                 </button>
@@ -97,7 +97,7 @@
             var modal = $(this);
             
             // Create URL
-            var url = "{{ route('management/special-fees/delete','') }}/" + specialFeeId;
+            var url = "{{ route('management/special-fees/delete/','') }}/" + specialFeeId;
     
             // Set message to modal body
             modal.find('.modal-body').text('¿Estás seguro de que deseas eliminar la cuota especial #' + specialFeeId + '?')

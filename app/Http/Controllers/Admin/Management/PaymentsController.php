@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\RDNAdminController;
 use App\Models\Payment as PaymentModel;
 use App\Enums\PaymentStatus;
+use App\Models\OrganizationBalance;
 
 class PaymentsController extends RDNAdminController
 {
@@ -60,6 +61,9 @@ class PaymentsController extends RDNAdminController
             $user = $payment->user;
             $user->balance += $payment->amount;
             $user->save();
+
+            //Add to the organization balance
+            OrganizationBalance::add($payment->amount);
             
             // Store audit
             $this->storeAudit('Aprobar pago ['. $payment->user->house.']', 'Pago aprobado por'.' para ' . $payment->user->house . ' por un monto de '. $payment->amount, $request->getClientIp());

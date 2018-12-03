@@ -14,7 +14,7 @@ class CollectionController extends RDNAdminController
 {
     public function index(){
 
-    	$collection = Collection::getNewest();
+        $collection = Collection::getNewest();
 
     	if(!$collection){
     		$collection = new Collection();
@@ -31,11 +31,32 @@ class CollectionController extends RDNAdminController
 
     public function create(){
 
+        $collection = Collection::getNewest();
     	$users = User::all();
+        $fee = Fee::getCurrentFee();
+        $feeAux = $fee;
+        $date = date('Y-m-d', time());
 
     	foreach ($users as $user) {
-    		echo($user->specialFee);
+    		if($user->specialFee){
+                $fee = $user->specialFee;
+            }
+            $user->balance = $user->balance - $fee->amount;
+            $user->save();
+            $fee = $feeAux;
     	}
-    	die;
+
+        if($collection){
+
+            $collection->newest = false;
+            $collection->save();
+        }
+        $newCollection = new Collection();
+        $newCollection->date = $date; 
+        $newCollection->fee_id = $fee->id;
+        $newCollection->newest = true;
+        $newCollection->save();
+
+        return $this->index();
     }
 }

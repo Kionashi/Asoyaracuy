@@ -7,10 +7,12 @@ use App\Helpers\Admin\AdminUploadFileHelper;
 use App\Models\User as UserModel;
 use Illuminate\Http\Request;
 use JsValidator;
+use Illuminate\Support\Facades\Hash;
 use App\Enums\Gender;
 use App\Models\Country;
 use App\Enums\UserStatus;
 use App\Models\User;
+use App\Models\specialFee;
 
 class UsersController extends RDNAdminController
 {
@@ -200,7 +202,8 @@ class UsersController extends RDNAdminController
         $this->subtitle = 'entrada #'.$id;
         
         // Find user by id
-        $user = UserModel::find($id);
+        $user = UserModel::find($id)
+            ->with('specialFee');
         
         if ($user) {
             // Display view
@@ -230,7 +233,11 @@ class UsersController extends RDNAdminController
         $this->subtitle = 'editar entrada #'.$id;
         
         // Load user
-        $user = UserModel::find($id);
+        $user = UserModel::where('id',$id)
+                ->with('specialFee')
+                ->first();
+
+        // dump($user);die;
         
         if($user){
             // Prepare view data
@@ -265,7 +272,7 @@ class UsersController extends RDNAdminController
         $user->balance = $values['balance'];
         $user->house = $values['house'];
         $user->email = $values['email'];
-        $user->password = sha1($values['password']);
+        $user->password = Hash::make($values['password']);
         $user->phone = $values['phone'];
         $user->register_date = date('Y-m-d H:i:s');
         $user->register_ip_address = $request->getClientIp();

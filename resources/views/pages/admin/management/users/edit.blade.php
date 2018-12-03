@@ -17,7 +17,7 @@
                         <div class="form-group">
                             {!! Form::label('house', 'Casa', array('class' => 'col-lg-2 col-sm-2 control-label')) !!}
                             <div class="col-lg-8">
-                                {!! Form::text('house', $user->username, array('class' => 'form-control')) !!}
+                                {!! Form::text('house', $user->house, array('class' => 'form-control')) !!}
                                 <span class="help-block help-block-error right-light">{{ $errors->first('house') }}</span>
                             </div>
                         </div>
@@ -66,18 +66,17 @@
                     <div class="form-group">
                         <div class="col-lg-8 col-lg-offset-2">
                             {!! Form::submit('Guardar', array('class' => 'btn btn-primary')) !!}
+                            {!! Form::close() !!}
                             @if(AdminAuthHelper::hasPermission('management/users/change-password'))
                                 <a href="{{ route('management/users/change-password', $user->id) }}" class="btn btn-primary">Cambiar contraseña</a>
                             @endif    
                             @if(AdminAuthHelper::hasPermission('management/special-fees/add'))
-                            
-                                <a href="{{route('management/special-fees/add', $user->id)}}" class="btn btn-primary">Administrar Cuota especial</a>
+                                <a href="{{route('management/special-fees/add',$user->id )}}" class="btn btn-primary">Administrar Cuota especial</a>
                             @endif                            
                             <a href="{{ route('management/users') }}" class="btn btn-default">Cancelar</a>
                         </div>
                     </div>
                 </div>
-                {!! Form::close() !!}
             </div>
         </div>
     </div>

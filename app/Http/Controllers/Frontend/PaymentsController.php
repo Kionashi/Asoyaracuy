@@ -10,7 +10,42 @@ use App\Models\Payment;
 
 class PaymentsController extends Controller
 {
-    public function create(Request $request){
+    public function index(){
+
+         // Load page size values
+        $pageSizes = explode(",", $this->configItems['rdn.admin.paginator-sizes']);
+        
+        // Load paginator default value
+        $pageDefault = $this->configItems['rdn.admin.paginator-default.value'];
+
+        $id = Auth::user()->id;
+
+        $payments = Payment::where('user_id',$id)->get();
+
+        return view('pages.frontend.payments.index')
+            ->with('payments',$payments)
+            ->with('userId',$id)
+            ->with('pageSizes',$pageSizes)
+            ->with('pageDefault',$pageDefault)
+            ;
+    }
+
+    public function create(){
+        $payment = new Payment();
+        return view('pages.frontend.payments.create')
+            ->with('payment',$payment);
+    }
+
+    public function detail($id){
+        $payment = Payment::find($id);
+
+        return view('pages.frontend.payments.detail')
+            ->with('payment',$payment)
+            ;
+    }
+
+
+    public function store(Request $request){
 
     	//Getting the data from the request (form)
     	$amount = $request->amount;
@@ -51,9 +86,6 @@ class PaymentsController extends Controller
     		$payment->save();
     	}
 
-    	return view('pages.frontend.home.index')
-    			->with('user', $user)
-    			->with('message','Pago registrado exitosamente')
-    			;
+    	return $this->index();
     }
 }

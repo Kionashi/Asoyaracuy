@@ -17,4 +17,8 @@ class SpecialFee extends Model
     		->first()
     		;
     }
+
+    public function user(){
+        return $this->BelongsTo('App\Models\User');
+    }
 }

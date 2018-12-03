@@ -1,74 +1,177 @@
 @extends('templates.frontend.master.index')
 @section('content')
-	<div class="overlay col-12  my-auto">
-	<!--<img src="{!! asset('frontend/images/cambures-rojos.jpg') !!}" style="max-width: 100%; max-height: 38.45em;"> -->
-	</div>
-    <div class="masthead">
-      <div class="masthead-bg"></div>
-      <div class="container h-100">
-        <div class="row h-100">
-          <div class="col-12 my-auto">
-            <div class="masthead-content text-white py-7 py-md-0">
-	            <h1 class="mb-3">Bienvenido {{$user->house}} {{$user->balance}}Bs</h1> 
-	            @if(isset($message)) 
+
+<div class="white-text-container background-image-container" style="background-image: url('{!! asset('frontend/images/img-home.jpg') !!}">
+    <div class="opacity">@if(isset($message)) 
 	            <p>{{$message}}</p>
-	            @endif
-	            <p class="mb-5">Registrar pago</p>
-	            {{Form::open(array('route' => 'create-payment', 'files' => true)) }}
-					{{Form::select('type', array('none' => 'Tipo de pago','Cheque' => 'Cheque', 'Transferencia' => 'Transferencia', 'Deposito' => 'Deposito'), null, array('class' => 'form-control', 'id' => 'payment_method2')) }} 
-					</br>
-			    	<select id="bank" name="bank" class = "form-control"><option value="Mercantil">Mercantil</option><option value="Venezuela">Venezuela</option><option value="Provincial">Provincial</option><option value="Bicentenario">Bicentenario</option><option value="Exterior">Exterior</option><option value="Banesco">Banesco</option><option value="BOD">BOD</option><option value="Industrial">Industrial</option><option value="Caroni">Caron&iacute;</option><option value="Banco del tesoro">Banco del tesoro</option></select>  
-					</br>
-					{{Form::text('confirmation_code','',array('class' => 'form-control','placeholder'=> 'Codigo de confirmacion'))}}
-					</br>
-					{{Form::text('amount','',array('class' => 'form-control','placeholder'=>'Monto'))}}
-					</br>
-					{{Form::text('date','',array('class' => 'form-control','placeholder'=>'Fecha del pago: AAAA-MM-DD'))}}
-					</br>
-					{!! Form::file('file') !!}
-					</br>	
-			    	{{Form::submit('Registrar pago',array('class' => 'btn btn-lg btn-primary btn-block')) }} 
-	            {!!Form::close()!!}
-	            <div class="input-group input-group-newsletter">
-	            	<a href="{{route('demo')}}"><button class="btn btn-primary" type="button">Demo</button></a>
-	            </div>
+	            @endif</div>
+    <div class="container">
+        <div class="row">
+           
+            <div class="col-md-6">
+                <h1>Hola {{$user->house}}</h1> 
+                <h2>Tu balance es de: {{$user->balance}}Bs</h2>
+                <p>Bienvenido a la pagina web de tu asociación de vecinos.</p>
+                 <a href="{{route('payments')}}" title="" class="btn btn-lg btn-primary">Revisar pagos</a>
             </div>
-          </div>
 
         </div>
-
-      </div>
     </div>
+</div>
 
-     <div class="social-icons masthead-content py-5 py-md-0 text-white">
-	            <h1 class="mb-3">Asoyaracuy</h1>
-	            <p class="mb-5">Asociación vecinal sin fines de lucro.</p>
-	            {!!Form::open(array('id'=> 'login', 'route' => 'login')) !!}
-	            <div class="input-group input-group-newsletter">
-            		{!! Form::text('email', null, array('id' => 'email', 'class' => 'form-control', 'placeholder' => 'Correo electrónico')) !!}
-		             <br />
-		            @if ($errors->has('email'))
-	                    <span class="help-block">
-	                        <strong>{{ $errors->first('email') }}</strong>
-	                    </span>
-	                @endif
-	            </div>
-	            <div class="input-group input-group-newsletter">
-		            {!! Form::password('password', null, array('id' => 'password', 'class' => 'form-control', 'placeholder' => 'Contraseña')) !!}
-	            	@if ($errors->has('password'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
-	            </div>
-	            <div class="input-group input-group-newsletter">
-	            	<button class="btn btn-secondary" type="submit">Ingresar</button>
-	            </div>
-	            {!!Form::close()!!}
-	            <div class="input-group input-group-newsletter">
-	            	<a href="{{route('demo')}}"><button class="btn btn-primary" type="button">Demo</button>
-	            </div>
+<div class="section-container border-section-container">
+    <div class="container">
+            <div class="row">
+                <div class="col-md-12 section-container-spacer">
+                    <div class="text-center">
+                        <h2>Vivamus laoreet</h2>
+                        <p> Auctor augue mauris augue neque. Posuere lorem ipsum dolor sit amet consectetur adipiscing.<br> Porta non
+                            pulvinar neque laoreet. Viverra ipsum nunc aliquet bibendum. </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="fa-container">
+                        <i class="fa fa-comment-o fa-3x" aria-hidden="true"></i>
+                    </div>
+                    <div class="text-center">
+                        <h3>Consectetur</h3>
+                    </div>
+                    <div>
+                        <p>Auctor augue mauris augue neque. Posuere lorem ipsum dolor sit amet consectetur adipiscing. Porta
+                            non pulvinar neque laoreet. Viverra ipsum nunc aliquet bibendum. Iaculis urna id volutpat lacus.
+                            Turpis egestas pretium aenean pharetra magna ac.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="fa-container">
+                        <i class="fa fa-heart-o fa-3x" aria-hidden="true"></i>
+                    </div>
+                    <div class="text-center">
+                        <h3>Malesuada</h3>
+                    </div>
+                    <div>
+                        <p>Auctor augue mauris augue neque. Posuere lorem ipsum dolor sit amet consectetur adipiscing. Porta
+                            non pulvinar neque laoreet. Viverra ipsum nunc aliquet bibendum. Iaculis urna id volutpat lacus.
+                            Turpis egestas pretium aenean pharetra magna ac.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="fa-container">
+                        <i class="fa fa-bell-o fa-3x" aria-hidden="true"></i>
+                    </div>
+                    <div class="text-center">
+                        <h3>Phasellus</h3>
+                    </div>
+                    <div>
+                        <p>Auctor augue mauris augue neque. Posuere lorem ipsum dolor sit amet consectetur adipiscing. Porta
+                            non pulvinar neque laoreet. Viverra ipsum nunc aliquet bibendum. Iaculis urna id volutpat lacus.
+                            Turpis egestas pretium aenean pharetra magna ac. 
+                        </p>
+                    </div>
+                </div>
+
             </div>
+    </div>
+</div>
+
+<div class="section-container">
+    <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+
+
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <img class="img-responsive" src="{!! asset('frontend/images/img-05.jpg') !!}" alt="First slide">
+                            </div>
+                            <div class="item">
+                                <img class="img-responsive" src="{!! asset('frontend/images/img-07.jpg') !!}" alt="Second slide">
+                            </div>
+                            <div class="item">
+                                <img class="img-responsive" src="{!! asset('frontend/images/img-05.jpg') !!}" alt="Third slide">
+                            </div>
+                        </div>
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                    </div>
+
+
+                </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="section-container background-color-container white-text-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="text-center">
+                    <h2>Vivamus laoreet</h2>
+                    <p> Auctor augue mauris augue neque. Posuere lorem ipsum dolor sit amet consectetur adipiscing. Porta non
+                        pulvinar neque laoreet. Viverra ipsum nunc aliquet bibendum. Iaculis urna id volutpat lacus. Turpis
+                        egestas pretium aenean pharetra magna ac. Id cursus metus aliquam eleifend mi. </p>
+                    <a href="./download.html" title="" class="btn btn-primary btn-lg">Download</a>
+                </div>
+            </div>
+        </div>
+     </div>
+ </div>
+
+ <div class="section-container">
+    <div class="container">
+        <div class="row">                   
+            <div class="col-md-7">
+                <img class="img-responsive" src="{!! asset('frontend/images/img-06.jpg') !!}" alt="">
+            </div>
+
+            <div class="col-md-5">
+                <ul class="features">
+                    <li>
+                        <h3>Dui augue</h3>
+                        <p>Auctor augue mauris augue neque. Posuere lorem ipsum dolor sit amet consectetur adipiscing.
+                        </p>
+                    </li>
+                    <li>
+                        <h3>Malesuada</h3>
+                        <p>Auctor augue mauris augue neque. Posuere lorem ipsum dolor sit amet consectetur adipiscing.
+                        </p>
+                    </li>
+                    <li>
+                        <h3>Bibendum</h3>
+                        <p>Auctor augue mauris augue neque. Posuere lorem ipsum dolor sit amet consectetur adipiscing.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        
+
+              
+            <div class="row">
+                <div class="col-md-4">
+                        <img class="img-responsive page-base-image" src="{!! asset('frontend/images/logo-01.jpg') !!}" alt="">
+
+                </div>
+                <div class="col-md-4">
+                        <img class="img-responsive page-base-image" src="{!! asset('frontend/images/logo-02.jpg') !!}" alt="">
+                </div>
+                <div class="col-md-4">
+                        <img class="img-responsive page-base-image" src="{!! asset('frontend/images/logo-03.jpg') !!}" alt="">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+	
 
 @endsection
 @section('custom_script')
